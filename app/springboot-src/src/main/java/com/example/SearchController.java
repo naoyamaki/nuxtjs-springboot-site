@@ -1,19 +1,16 @@
-package com.example.restservice;
+package com.example;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restservice.SearchParams;
+import com.example.search.SearchParams;
 
 @RestController
 public class SearchController {
 
-	@RequestMapping("/search/{num}/")
-	@ResponseBody
+	@GetMapping("/search/{num}/")
 	public String search(@PathVariable("num") String num) {
-		return num*100;
+		return num+" test";
 	}
 }
