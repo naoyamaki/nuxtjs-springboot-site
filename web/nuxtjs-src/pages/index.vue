@@ -3,6 +3,10 @@
     <v-col cols="12" sm="8" md="6">
     <p>結果：{{ result }}</p>
       <v-text-field
+        label="PATH"
+        v-model="path"
+      ></v-text-field>
+      <v-text-field
         label="No."
         v-model="num"
       ></v-text-field>
@@ -20,12 +24,13 @@
     data() {
       return {
         result: 0,
-        num: null
+        num: null,
+        path: null
       }
     },
     methods: {
       click() {
-        this.result = this.$axios.$get("http://localhost:8080/search/"+this.num+"/")
+        this.result = this.$axios.$get("http://localhost/api/"+this.path+"/")
           .then( response => {
             console.log('response data', response)
           })
