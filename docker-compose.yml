@@ -1,20 +1,20 @@
 version: "3"
 services:
-  web:
-    build: ./web
-    image: nuxt_nginx
-    ports:
-      - 80:80
-    depends_on:
-      - app
-  app:
-    build: ./app
-    image: spring_boot
-    depends_on:
-      - db
-    environment:
-      - DB_PASSWORD=#sample1234
-      - DB_HOST=db
+#  web:
+#    build: ./web
+#    image: nuxt_nginx
+#    ports:
+#      - 80:80
+#    depends_on:
+#      - app
+#  app:
+#    build: ./app
+#    image: spring_boot
+#    depends_on:
+#      - db
+#    environment:
+#      - DB_PASSWORD=#sample1234
+#      - DB_HOST=db
   db:
     build: ./db
     image: sample_db

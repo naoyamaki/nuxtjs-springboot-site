@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'nu.studer.jooq' version '6.0'
 }
 
 group = 'com.example'
@@ -22,6 +23,90 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.jooq:jooq'
+	implementation 'org.jooq:jooq-codegen'
+	implementation 'org.jooq:jooq-meta'
+	implementation 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 }
+
+jooq {
+	version = '3.15.5'
+	configurations {
+		main {
+			generationTool {
+				jdbc {
+					driver = 'com.mysql.jdbc.Driver'
+					url = 'jdbc:mysql://localhost:3306/main?serverTimezone=JST'
+					user = 'root'
+					password = '$sample1234'
+				}
+				generator {
+					name = 'org.jooq.codegen.DefaultGenerator'
+					database {
+						name = 'org.jooq.meta.mysql.MySQLDatabase'
+						inputSchema = 'public'
+						forcedTypes {
+							forcedType {
+								name = 'varchar'
+								includeExpression = '.*'
+								includeTypes = 'JSONB?'
+							}
+							forcedType {
+								name = 'varchar'
+								includeExpression = '.*'
+								includeTypes = 'INET'
+							}
+						}
+					}
+					generate {
+						deprecated = false
+						records = true
+						immutablePojos = true
+						fluentSetters = true
+					}
+					target {
+						packageName = 'nu.studer.sample'
+						directory = 'src/main/java/com/example/jooq'
+					}
+					strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+				}
+			}
+		}
+	}
+}
+
+//jooq {
+//	library (sourceSets.main) {
+//		jdbc {
+//			driver = 'com.mysql.jdbc.Driver'
+//			url = 'jdbc:mysql://localhost:3306/main?serverTimezone=JST'
+//			user = 'root'
+//			password = '$sample1234'
+//		}
+//		generator {
+//			name = 'org.jooq.codegen.DefaultGenerator'
+//			database {
+//				name = 'org.jooq.meta.mysql.MySQLDatabase'
+//				inputSchema = 'public'
+//				forcedTypes {
+//					forcedType {
+//						name = 'varchar'
+//						includeExpression = '.*'
+//						includeTypes = 'JSONB?'
+//					}
+//					forcedType {
+//						name = 'varchar'
+//						includeExpression = '.*'
+//						includeTypes = 'INET'
+//					}
+//				}
+//			}
+//			target {
+//				packageName = 'nu.studer.sample'
+//				directory = 'src/main/java/com/example/jooq'
+//			}
+//		}
+//	}
+//}
