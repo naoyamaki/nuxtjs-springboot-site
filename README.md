@@ -4,20 +4,20 @@
 
 ```txt
 .
-├── doc/ -> `ドキュメント置き場`
-├── build_and_start.sh -> ``
-├── docker-compose.yml -> ``
-├── web -> `Webサーバ資材`
+├── doc -> ドキュメント置き場
+├── build_and_start.sh -> ローカル環境構築shell
+├── docker-compose.yml
+├── web -> Webサーバ資材
 |   ├── Dockerfile
-|   ├── nginx -> `nginx設定ファイル`
+|   ├── nginx -> nginx設定ファイル
 |   │   ├── conf.d
 |   │   │   └── default.conf
 |   │   ├── mime.types
 |   │   └── nginx.conf
-|   └── nuxtjs-src -> `Nuxt.js資材`
-├── app -> `applicationサーバ資材`
+|   └── nuxtjs-src -> Nuxt.js資材
+├── app -> applicationサーバ資材
 │   ├── Dockerfile
-│   └── spring-boot-src -> `application資材`
+│   └── spring-boot-src -> application資材
 │       ├── build.gradle
 │       ├── gradle
 │       │   └── wrapper
@@ -26,14 +26,14 @@
 │       ├── gradlew
 │       ├── settings.gradle
 │       └── src
-└── db -> `ローカル用DB資材`
+└── db -> ローカル用DB資材
     ├── Dockerfile
-    ├── mysql -> `MySQL設定ファイル`
+    ├── mysql -> MySQL設定ファイル
     │   ├── conf.d
     │   │   ├── docker.cnf
     │   │   └── mysql.cnf
     │   └── my.cnf
-    └── mysql_init -> `ローカルDBのDumpファイル`
+    └── mysql_init -> ローカルDBのDumpファイル
         └── 1_dump.sql
 ```
 
