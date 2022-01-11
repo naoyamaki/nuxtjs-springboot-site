@@ -13,8 +13,9 @@ services:
     depends_on:
       - db
     environment:
-      - DB_PASSWORD=#sample1234
-      - DB_HOST=db
+      - DATA_SRC_URL=jdbc:mysql://db:3306/main
+      - DATA_SRC_USERNAME=root
+      - DATA_SRC_PASSWORD=#sample1234
   db:
     build: ./db
     image: sample_db
