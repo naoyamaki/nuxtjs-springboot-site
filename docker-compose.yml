@@ -3,6 +3,7 @@ services:
   web:
     build: ./web
     image: nuxt_nginx
+    container_name: web
     ports:
       - 80:80
     depends_on:
@@ -10,15 +11,17 @@ services:
   app:
     build: ./app
     image: spring_boot
+    container_name: app
     depends_on:
       - db
     environment:
-      - DATA_SRC_URL=jdbc:mysql://db:3306/main
+      - DATA_SRC_URL=jdbc:mysql://db:3306/main?useUnicode=true&characterEncoding=utf8&serverTimezone=JST&enabledTLSProtocols=TLSv1.2&autoReconnect=true&useSSL=false
       - DATA_SRC_USERNAME=root
       - DATA_SRC_PASSWORD=#sample1234
   db:
     build: ./db
     image: sample_db
+    container_name: db
     ports:
       - 3306:3306
     environment:
