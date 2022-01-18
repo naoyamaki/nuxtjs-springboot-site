@@ -8,16 +8,23 @@ services:
       - 80:80
     depends_on:
       - app
+    volumes:
+      - ./logs/web:/var/log/nginx
   app:
     build: ./app
     image: spring_boot
     container_name: app
+    ports:
+      - 8080:8080
     depends_on:
       - db
     environment:
       - DATA_SRC_URL=jdbc:mysql://db:3306/main?useUnicode=true&characterEncoding=utf8&serverTimezone=JST&enabledTLSProtocols=TLSv1.2&autoReconnect=true&useSSL=false
       - DATA_SRC_USERNAME=root
       - DATA_SRC_PASSWORD=#sample1234
+    volumes:
+      - ./app/spring-boot-src/build/libs/spring-boot-src-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/app.war
+      - ./logs/app:/usr/local/tomcat/logs
   db:
     build: ./db
     image: sample_db

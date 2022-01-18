@@ -1,4 +1,3 @@
-FROM openjdk:11-jdk-slim
-ARG JAR_FILE=spring-boot-src/build/libs/\*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM tomcat:8.5-jdk11-corretto
+# 必要に応じconf配下の設定ファイルをコピー(conf内はデフォルト設定ファイル)
+# e.g COPY conf/server.xml /usr/local/tomcat/conf/server.xml
