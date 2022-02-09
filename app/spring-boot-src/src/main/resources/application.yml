@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://db:3306/main?useUnicode=true&characterEncoding=utf8&serverTimezone=JST&enabledTLSProtocols=TLSv1.2
-    username: root
-    password: #sample1234
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/main?useUnicode=true&characterEncoding=utf8&connectionTimeZone=SERVER&enabledTLSProtocols=TLSv1.2
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:#sample1234}
     driver-class-name: com.mysql.cj.jdbc.Driver

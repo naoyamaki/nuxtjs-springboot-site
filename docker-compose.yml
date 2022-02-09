@@ -19,9 +19,9 @@ services:
     depends_on:
       - db
     environment:
-      - DATA_SRC_URL=jdbc:mysql://db:3306/main?useUnicode=true&characterEncoding=utf8&serverTimezone=JST&enabledTLSProtocols=TLSv1.2&autoReconnect=true&useSSL=false
-      - DATA_SRC_USERNAME=root
-      - DATA_SRC_PASSWORD=#sample1234
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=#sample1234
     volumes:
       - ./app/spring-boot-src/build/libs/spring-boot-src-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/app.war
       - ./logs/app:/usr/local/tomcat/logs
