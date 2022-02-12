@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.2'
+	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'war'
@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
@@ -24,13 +24,14 @@ configurations {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-jooq:2.6.2'
-	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.2'
+	implementation 'org.springframework.boot:spring-boot-starter-jooq:2.6.3'
+//	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.3'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
 	implementation 'org.jooq:jooq:3.15.5'
 	implementation 'org.jooq:jooq-codegen:3.15.5'
 	implementation 'org.jooq:jooq-meta:3.15.5'
 	runtimeOnly 'mysql:mysql-connector-java:8.0.25'
 	compileOnly 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.6.3'
 }
