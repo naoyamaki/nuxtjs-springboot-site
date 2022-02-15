@@ -27,7 +27,7 @@ public class JooqSourceGenerator {
           .withInputSchema("main")
         )
         .withTarget(new Target()
-          .withPackageName("com.example.jooq")
+          .withPackageName("com.example.infrastructure.jooq")
           .withDirectory("src/main/java")
         )
       );

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.presentation.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
