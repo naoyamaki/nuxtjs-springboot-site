@@ -4,7 +4,8 @@
 package com.example.infrastructure.jooq;
 
 
-import com.example.infrastructure.jooq.tables.MstRoll;
+import com.example.infrastructure.jooq.tables.Rating;
+import com.example.infrastructure.jooq.tables.Review;
 import com.example.infrastructure.jooq.tables.User;
 
 
@@ -15,9 +16,14 @@ import com.example.infrastructure.jooq.tables.User;
 public class Tables {
 
     /**
-     * The table <code>main.mst_roll</code>.
+     * The table <code>main.rating</code>.
      */
-    public static final MstRoll MST_ROLL = MstRoll.MST_ROLL;
+    public static final Rating RATING = Rating.RATING;
+
+    /**
+     * The table <code>main.review</code>.
+     */
+    public static final Review REVIEW = Review.REVIEW;
 
     /**
      * The table <code>main.user</code>.

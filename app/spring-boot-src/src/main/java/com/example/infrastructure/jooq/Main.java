@@ -4,7 +4,8 @@
 package com.example.infrastructure.jooq;
 
 
-import com.example.infrastructure.jooq.tables.MstRoll;
+import com.example.infrastructure.jooq.tables.Rating;
+import com.example.infrastructure.jooq.tables.Review;
 import com.example.infrastructure.jooq.tables.User;
 
 import java.util.Arrays;
@@ -29,9 +30,14 @@ public class Main extends SchemaImpl {
     public static final Main MAIN = new Main();
 
     /**
-     * The table <code>main.mst_roll</code>.
+     * The table <code>main.rating</code>.
      */
-    public final MstRoll MST_ROLL = MstRoll.MST_ROLL;
+    public final Rating RATING = Rating.RATING;
+
+    /**
+     * The table <code>main.review</code>.
+     */
+    public final Review REVIEW = Review.REVIEW;
 
     /**
      * The table <code>main.user</code>.
@@ -54,7 +60,8 @@ public class Main extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            MstRoll.MST_ROLL,
+            Rating.RATING,
+            Review.REVIEW,
             User.USER
         );
     }

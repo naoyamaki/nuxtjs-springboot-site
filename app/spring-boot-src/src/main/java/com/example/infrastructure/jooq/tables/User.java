@@ -4,21 +4,20 @@
 package com.example.infrastructure.jooq.tables;
 
 
-import com.example.infrastructure.jooq.Indexes;
 import com.example.infrastructure.jooq.Keys;
 import com.example.infrastructure.jooq.Main;
 import com.example.infrastructure.jooq.tables.records.UserRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
-import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -56,19 +55,34 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>main.user.first_name</code>.
+     * The column <code>main.user.email</code>.
      */
-    public final TableField<UserRecord, String> FIRST_NAME = createField(DSL.name("first_name"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<UserRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(319).nullable(false), this, "");
 
     /**
-     * The column <code>main.user.last_name</code>.
+     * The column <code>main.user.password</code>.
      */
-    public final TableField<UserRecord, String> LAST_NAME = createField(DSL.name("last_name"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(256).nullable(false), this, "");
 
     /**
-     * The column <code>main.user.roll_id_fk</code>.
+     * The column <code>main.user.user_name</code>.
      */
-    public final TableField<UserRecord, Integer> ROLL_ID_FK = createField(DSL.name("roll_id_fk"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<UserRecord, String> USER_NAME = createField(DSL.name("user_name"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+
+    /**
+     * The column <code>main.user.insert_date</code>.
+     */
+    public final TableField<UserRecord, LocalDateTime> INSERT_DATE = createField(DSL.name("insert_date"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
+
+    /**
+     * The column <code>main.user.update_date</code>.
+     */
+    public final TableField<UserRecord, LocalDateTime> UPDATE_DATE = createField(DSL.name("update_date"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
+
+    /**
+     * The column <code>main.user.delete_flag</code>.
+     */
+    public final TableField<UserRecord, Byte> DELETE_FLAG = createField(DSL.name("delete_flag"), SQLDataType.TINYINT.nullable(false), this, "");
 
     private User(Name alias, Table<UserRecord> aliased) {
         this(alias, aliased, null);
@@ -109,11 +123,6 @@ public class User extends TableImpl<UserRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.USER_USER_ROLL_IDX);
-    }
-
-    @Override
     public Identity<UserRecord, Integer> getIdentity() {
         return (Identity<UserRecord, Integer>) super.getIdentity();
     }
@@ -125,21 +134,7 @@ public class User extends TableImpl<UserRecord> {
 
     @Override
     public List<UniqueKey<UserRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.KEY_USER_ID_UNIQUE);
-    }
-
-    @Override
-    public List<ForeignKey<UserRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.USER_ROLL);
-    }
-
-    private transient MstRoll _mstRoll;
-
-    public MstRoll mstRoll() {
-        if (_mstRoll == null)
-            _mstRoll = new MstRoll(this, Keys.USER_ROLL);
-
-        return _mstRoll;
+        return Arrays.asList(Keys.KEY_USER_ID_UNIQUE, Keys.KEY_USER_EMAIL_UNIQUE);
     }
 
     @Override
@@ -169,11 +164,11 @@ public class User extends TableImpl<UserRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, String, Integer> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row7<Integer, String, String, String, LocalDateTime, LocalDateTime, Byte> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

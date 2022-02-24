@@ -4,7 +4,8 @@
 package com.example.infrastructure.jooq;
 
 
-import com.example.infrastructure.jooq.tables.User;
+import com.example.infrastructure.jooq.tables.Rating;
+import com.example.infrastructure.jooq.tables.Review;
 
 import org.jooq.Index;
 import org.jooq.OrderField;
@@ -22,5 +23,7 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index USER_USER_ROLL_IDX = Internal.createIndex(DSL.name("user_roll_idx"), User.USER, new OrderField[] { User.USER.ROLL_ID_FK }, false);
+    public static final Index RATING_REVIEW_ID_FK_IDX = Internal.createIndex(DSL.name("review_id_fk_idx"), Rating.RATING, new OrderField[] { Rating.RATING.REVIEW_ID }, false);
+    public static final Index RATING_USER_ID_FK_IDX = Internal.createIndex(DSL.name("user_id_fk_idx"), Rating.RATING, new OrderField[] { Rating.RATING.USER_ID }, false);
+    public static final Index REVIEW_USER_ID_FK_IDX = Internal.createIndex(DSL.name("user_id_fk_idx"), Review.REVIEW, new OrderField[] { Review.REVIEW.USER_ID }, false);
 }

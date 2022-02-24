@@ -4,9 +4,11 @@
 package com.example.infrastructure.jooq;
 
 
-import com.example.infrastructure.jooq.tables.MstRoll;
+import com.example.infrastructure.jooq.tables.Rating;
+import com.example.infrastructure.jooq.tables.Review;
 import com.example.infrastructure.jooq.tables.User;
-import com.example.infrastructure.jooq.tables.records.MstRollRecord;
+import com.example.infrastructure.jooq.tables.records.RatingRecord;
+import com.example.infrastructure.jooq.tables.records.ReviewRecord;
 import com.example.infrastructure.jooq.tables.records.UserRecord;
 
 import org.jooq.ForeignKey;
@@ -27,9 +29,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<MstRollRecord> KEY_MST_ROLL_ID_UNIQUE = Internal.createUniqueKey(MstRoll.MST_ROLL, DSL.name("KEY_mst_roll_id_UNIQUE"), new TableField[] { MstRoll.MST_ROLL.ID }, true);
-    public static final UniqueKey<MstRollRecord> KEY_MST_ROLL_LABEL_UNIQUE = Internal.createUniqueKey(MstRoll.MST_ROLL, DSL.name("KEY_mst_roll_label_UNIQUE"), new TableField[] { MstRoll.MST_ROLL.LABEL }, true);
-    public static final UniqueKey<MstRollRecord> KEY_MST_ROLL_PRIMARY = Internal.createUniqueKey(MstRoll.MST_ROLL, DSL.name("KEY_mst_roll_PRIMARY"), new TableField[] { MstRoll.MST_ROLL.ID }, true);
+    public static final UniqueKey<ReviewRecord> KEY_REVIEW_PRIMARY = Internal.createUniqueKey(Review.REVIEW, DSL.name("KEY_review_PRIMARY"), new TableField[] { Review.REVIEW.ID }, true);
+    public static final UniqueKey<UserRecord> KEY_USER_EMAIL_UNIQUE = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_email_UNIQUE"), new TableField[] { User.USER.EMAIL }, true);
     public static final UniqueKey<UserRecord> KEY_USER_ID_UNIQUE = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_id_UNIQUE"), new TableField[] { User.USER.ID }, true);
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_PRIMARY"), new TableField[] { User.USER.ID }, true);
 
@@ -37,5 +38,7 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<UserRecord, MstRollRecord> USER_ROLL = Internal.createForeignKey(User.USER, DSL.name("user_roll"), new TableField[] { User.USER.ROLL_ID_FK }, Keys.KEY_MST_ROLL_PRIMARY, new TableField[] { MstRoll.MST_ROLL.ID }, true);
+    public static final ForeignKey<RatingRecord, ReviewRecord> RATING_REVIEW_ID_FK = Internal.createForeignKey(Rating.RATING, DSL.name("rating_review_id_fk"), new TableField[] { Rating.RATING.REVIEW_ID }, Keys.KEY_REVIEW_PRIMARY, new TableField[] { Review.REVIEW.ID }, true);
+    public static final ForeignKey<RatingRecord, UserRecord> RATING_USER_ID_FK = Internal.createForeignKey(Rating.RATING, DSL.name("rating_user_id_fk"), new TableField[] { Rating.RATING.USER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
+    public static final ForeignKey<ReviewRecord, UserRecord> REVIEW_USER_ID_FK = Internal.createForeignKey(Review.REVIEW, DSL.name("review_user_id_fk"), new TableField[] { Review.REVIEW.USER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
 }
