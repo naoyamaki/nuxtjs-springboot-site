@@ -22,7 +22,7 @@ services:
     environment:
       - DB_HOST=db
       - DB_USER=root
-      - DB_PASSWORD=#sample1234
+      - DB_PASSWORD=password1234
     volumes:
       - ./app/spring-boot-src/build/libs/spring-boot-src-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/app.war
       - ./logs/app:/usr/local/tomcat/logs
@@ -33,13 +33,13 @@ services:
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=#sample1234
+      - MYSQL_ROOT_PASSWORD=password1234
       - MYSQL_DATABASE=main
     volumes:
       - ./db/mysql_init:/docker-entrypoint-initdb.d
     # dbの起動を待ってから依存コンテナを起動
     healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
+      test: mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD
       interval: 10s
       timeout: 5s
       retries: 30

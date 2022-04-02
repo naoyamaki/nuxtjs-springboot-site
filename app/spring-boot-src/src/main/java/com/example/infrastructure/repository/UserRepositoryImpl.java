@@ -18,15 +18,18 @@ import static com.example.infrastructure.jooq.Tables.USER;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-    String url = "jdbc:mysql://localhost:3306/main?useUnicode=true&characterEncoding=utf8&connectionTimeZone=SERVER&enabledTLSProtocols=TLSv1.2";
+
+    String url = "jdbc:mysql://db:3306/main?useUnicode=true&characterEncoding=utf8&connectionTimeZone=SERVER&enabledTLSProtocols=TLSv1.2";
     String userName = "root";
-    String password = "#sample1234";
+    String password = "password1234";
+
     Connection connection = null;
 
     {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, userName, password);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
