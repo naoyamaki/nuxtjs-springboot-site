@@ -17,7 +17,7 @@ public class JooqSourceGenerator {
         .withDriver("com.mysql.jdbc.Driver")
         .withUrl("jdbc:mysql://localhost:3306/main")
         .withUser("root")
-        .withPassword("#sample1234")
+        .withPassword("password1234")
       )
       .withGenerator(new Generator()
         .withDatabase(new Database()

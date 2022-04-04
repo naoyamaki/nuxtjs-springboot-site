@@ -74,12 +74,12 @@ public class Review extends TableImpl<ReviewRecord> {
     /**
      * The column <code>main.review.category_id</code>.
      */
-    public final TableField<ReviewRecord, Byte> CATEGORY_ID = createField(DSL.name("category_id"), SQLDataType.TINYINT.nullable(false), this, "");
+    public final TableField<ReviewRecord, Integer> CATEGORY_ID = createField(DSL.name("category_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>main.review.status</code>.
      */
-    public final TableField<ReviewRecord, Byte> STATUS = createField(DSL.name("status"), SQLDataType.TINYINT.nullable(false), this, "");
+    public final TableField<ReviewRecord, Integer> STATUS = createField(DSL.name("status"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>main.review.insert_date</code>.
@@ -194,7 +194,7 @@ public class Review extends TableImpl<ReviewRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, Integer, String, String, Byte, Byte, LocalDateTime, LocalDateTime, Byte> fieldsRow() {
+    public Row9<Integer, Integer, String, String, Integer, Integer, LocalDateTime, LocalDateTime, Byte> fieldsRow() {
         return (Row9) super.fieldsRow();
     }
 }
