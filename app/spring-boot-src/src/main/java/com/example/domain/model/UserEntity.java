@@ -10,14 +10,12 @@ public class UserEntity {
     private String userName;
     private LocalDateTime insertDate;
     private LocalDateTime updateDate;
-    private Boolean deleteFlag;
 
-    public UserEntity(Integer id, String email, String userName, LocalDateTime insertDate, LocalDateTime updateDate, Boolean deleteFlag) {
+    public UserEntity(Integer id, String email, String userName, LocalDateTime insertDate, LocalDateTime updateDate) {
         this.id = id;
         this.email = email;
         this.userName = userName;
         this.insertDate = insertDate;
         this.updateDate = updateDate;
-        this.deleteFlag = deleteFlag;
     }
 }

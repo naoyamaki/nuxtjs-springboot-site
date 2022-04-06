@@ -4,15 +4,15 @@ import com.example.domain.model.UserEntity;
 import com.example.domain.repository.UserRepository;
 import com.example.infrastructure.jooq.tables.*;
 import com.example.infrastructure.jooq.tables.records.UserRecord;
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
+import org.jooq.*;
 import org.jooq.impl.DSL;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static com.example.infrastructure.jooq.Tables.USER;
 
@@ -24,7 +24,6 @@ public class UserRepositoryImpl implements UserRepository {
     String password = "password1234";
 
     Connection connection = null;
-
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -37,11 +36,26 @@ public class UserRepositoryImpl implements UserRepository {
     DSLContext create = DSL.using(connection, SQLDialect.MYSQL);
 
     public void add(UserEntity user) {
-        int numOfInsert = create.insertInto(USER, USER.EMAIL, USER.PASSWORD, USER.USER_NAME, USER.INSERT_DATE, USER.UPDATE_DATE, USER.DELETE_FLAG)
-            .values(user.getEmail(), user.getUserName(), user.getUserName(), user.getInsertDate(), user.getUpdateDate(), Byte.valueOf(Boolean.toString(user.getDeleteFlag())))
+        int numOfInsert = create.insertInto(
+                USER
+                        ,USER.EMAIL
+                        ,USER.PASSWORD
+                        ,USER.USER_NAME
+                        ,USER.INSERT_DATE
+                        ,USER.UPDATE_DATE
+                        ,USER.DELETE_FLAG
+                )
+            .values(
+                    user.getEmail(),
+                    user.getUserName(),
+                    user.getUserName(),
+                    user.getInsertDate(),
+                    user.getUpdateDate(),
+                    (byte) 0
+            )
             .execute();
-        if (numOfInsert < 1) {
-            // do error action
+        if (numOfInsert != 1) {
+            // TODO:エラーを返す
         }
     }
 
@@ -52,11 +66,58 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public UserEntity searchUser(Integer userId) {
-        UserRecord record = create
-                .selectFrom(USER)
+        Record5<Integer, String, String, LocalDateTime, LocalDateTime> record =
+                create.select(
+                        USER.ID
+                        ,USER.EMAIL
+                        ,USER.USER_NAME
+                        ,USER.INSERT_DATE
+                        ,USER.UPDATE_DATE
+                )
+                .from(USER)
                 .where(USER.ID.equal(userId))
-                .fetchOneInto(UserRecord.class);
-        UserEntity user = new UserEntity(record.getId(), record.getEmail(), record.getUserName(), record.getInsertDate(), record.getUpdateDate(), Boolean.valueOf(Byte.toString(record.getDeleteFlag())));
+                .fetchOne();
+        UserEntity user = null;
+        if (record != null) {
+            user = new UserEntity(
+                    record.getValue(USER.ID),
+                    record.getValue(USER.EMAIL),
+                    record.getValue(USER.USER_NAME),
+                    record.getValue(USER.INSERT_DATE),
+                    record.getValue(USER.UPDATE_DATE)
+            );
+        }
         return user;
+    }
+
+    public ArrayList<UserEntity> getAllUsers(Integer offset, Integer limit) {
+        Select<Record5<Integer, String, String, LocalDateTime, LocalDateTime>> records =
+                create.select(
+                        USER.ID
+                        ,USER.EMAIL
+                        ,USER.USER_NAME
+                        ,USER.INSERT_DATE
+                        ,USER.UPDATE_DATE
+                )
+                .from(USER)
+                .where(USER.DELETE_FLAG.equal((byte) 0))
+                .orderBy(USER.ID).limit(limit).offset(offset);
+        if (records.stream().count() == 0) {
+            // TODO: エラーを返す
+            return null;
+        }
+
+        ArrayList<UserEntity> userList = new ArrayList<>();
+        for (Record5 record: records) {
+            UserEntity user = new UserEntity(
+                    record.getValue(USER.ID),
+                    record.getValue(USER.EMAIL),
+                    record.getValue(USER.USER_NAME),
+                    record.getValue(USER.INSERT_DATE),
+                    record.getValue(USER.UPDATE_DATE)
+            );
+            userList.add(user);
+        }
+        return userList;
     }
 }
