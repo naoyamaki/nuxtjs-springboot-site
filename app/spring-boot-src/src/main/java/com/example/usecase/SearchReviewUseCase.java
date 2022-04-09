@@ -5,6 +5,8 @@ import com.example.domain.model.UserEntity;
 import com.example.domain.repository.PublishReviewRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 @Service
 public class SearchReviewUseCase {
+    Logger logger = LoggerFactory.getLogger(SearchReviewUseCase.class);
 
     @Autowired
     private PublishReviewRepository publishReviewRepository;
@@ -29,6 +32,7 @@ public class SearchReviewUseCase {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        logger.info(response);
         return response;
     }
 
@@ -43,6 +47,7 @@ public class SearchReviewUseCase {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        logger.info(response);
         return response;
     }
 

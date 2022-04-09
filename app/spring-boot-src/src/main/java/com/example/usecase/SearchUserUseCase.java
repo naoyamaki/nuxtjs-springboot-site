@@ -2,6 +2,8 @@ package com.example.usecase;
 
 import com.example.domain.model.UserEntity;
 import com.example.domain.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 
 @Service
 public class SearchUserUseCase {
+    Logger logger = LoggerFactory.getLogger(SearchUserUseCase.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -27,6 +30,7 @@ public class SearchUserUseCase {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        logger.info(response);
         return response;
     }
 
@@ -41,6 +45,7 @@ public class SearchUserUseCase {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        logger.info(response);
         return response;
     }
 }
