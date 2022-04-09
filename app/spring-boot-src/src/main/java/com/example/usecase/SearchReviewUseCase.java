@@ -5,6 +5,7 @@ import com.example.domain.model.UserEntity;
 import com.example.domain.repository.PublishReviewRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class SearchReviewUseCase {
         Integer offset = (pageNum - 1) * REVIEW_PER_PAGE;
         ArrayList<PublishReviewEntity> publishReviewList = publishReviewRepository.getByPage(offset, REVIEW_PER_PAGE);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         String response = null;
         try {
             response = objectMapper.writeValueAsString(publishReviewList);
@@ -40,7 +41,7 @@ public class SearchReviewUseCase {
         Integer offset = (pageNum - 1) * REVIEW_PER_PAGE;
         ArrayList<PublishReviewEntity> publishReviewList = publishReviewRepository.searchByUserId(userId, offset, REVIEW_PER_PAGE);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         String response = null;
         try {
             response = objectMapper.writeValueAsString(publishReviewList);

@@ -2,6 +2,7 @@ package com.example.usecase;
 
 import com.example.domain.model.UserEntity;
 import com.example.domain.repository.UserRepository;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SearchUserUseCase {
     public String searchUserById(Integer userId) {
         UserEntity user = userRepository.searchUser(userId);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         String response = null;
         try {
             response = objectMapper.writeValueAsString(user);
@@ -38,7 +39,7 @@ public class SearchUserUseCase {
         Integer offset = (pageNum - 1) * REVIEW_PER_PAGE;
         ArrayList<UserEntity> userList = userRepository.getAllUsers(offset, REVIEW_PER_PAGE);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         String response = null;
         try {
             response = objectMapper.writeValueAsString(userList);
