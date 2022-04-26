@@ -26,15 +26,16 @@
 │       ├── gradlew
 │       ├── settings.gradle
 │       └── src
-└── db -> ローカル用DB資材
-    ├── Dockerfile
-    ├── mysql -> MySQL設定ファイル
-    │   ├── conf.d
-    │   │   ├── docker.cnf
-    │   │   └── mysql.cnf
-    │   └── my.cnf
-    └── mysql_init -> ローカルDBのDumpファイル
-        └── 1_dump.sql
+├── db -> ローカル用DB資材
+│   ├── Dockerfile
+│   ├── mysql -> MySQL設定ファイル
+│   │   ├── conf.d
+│   │   │   ├── docker.cnf
+│   │   │   └── mysql.cnf
+│   │   └── my.cnf
+│   └── mysql_init -> ローカルDBのDumpファイル
+│       └── 1_dump.sql
+└─ terraform -> AWS資材定義
 ```
 
 # 単体環境構築手順
@@ -83,4 +84,4 @@
 |バグ修正|`:bug:`|🐛|
 |リファクタリング|`:recycle:`|♻️|
 |ドキュメント|`:books:`|📚|
-|修正途中|:construction:|🚧|
+|修正途中|`:construction:`|🚧|
