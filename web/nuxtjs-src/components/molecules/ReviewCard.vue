@@ -1,19 +1,30 @@
 <template>
-	<article>
-		<a :href="url">
-			<p>適当なサンプル</p>
-		</a>
-	</article>
+  <a href="/#">
+    <article>
+      <p>{{ review.title }}</p>
+      <p>{{ review.body }}</p>
+    </article>
+  </a>
 </template>
 
 <script>
 export default {
-	data: () => ({
-    url: '/hogehoge/fugafuga/',
-  })
+  props: {
+   review: {
+     type: Object,
+     required: true,
+   },
+ },
 }
 </script>
 
-<style scoped>
-  /* CSS部分 */
+<style lang="scss" scoped>
+a {
+  article {
+    margin: 16px;
+    padding: 16px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+  }
+}
 </style>
