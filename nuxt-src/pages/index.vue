@@ -23,8 +23,7 @@ export default {
     axios
       .get("/api/review/")
         .then((res) => {
-          console.log(res);
-          this.reviews = res.data.reviews;
+          this.reviews = res.data;
         })
         .catch((err) => {
           console.log(err);

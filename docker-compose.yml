@@ -46,7 +46,7 @@ services:
     # dbの起動を待ってから依存コンテナを起動
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD
-      interval: 10s
-      timeout: 5s
+      interval: 5s
+      timeout: 3s
       retries: 30
-      start_period: 30s
+      start_period: 10s
