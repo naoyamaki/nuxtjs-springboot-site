@@ -1,21 +1,29 @@
 version: "3"
 services:
-  web:
-    build: ./web
-    image: nuxt_nginx
-    container_name: web
+  # ALBの代替コンテナ
+  lb:
+    build: ./lb
+    image: lb
+    container_name: lb
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - app
+      - contents
     volumes:
-      - ./logs/web:/var/log/nginx
+      - ./logs/lb:/var/log/nginx
+  # S3の代替コンテナ
+  contents:
+    build: ./contents
+    image: contents
+    container_name: contents
+    volumes:
+      - ./nuxt-src/dist/:/usr/share/nginx/html/
   app:
     build: ./app
-    image: spring_boot
+    image: app
     container_name: app
-    ports:
-      - 8080:8080
     depends_on:
       db:
         condition: service_healthy
@@ -30,8 +38,6 @@ services:
     build: ./db
     image: sample_db
     container_name: db
-    ports:
-      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=password1234
       - MYSQL_DATABASE=main
