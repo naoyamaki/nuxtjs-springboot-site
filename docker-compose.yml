@@ -32,7 +32,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=password1234
     volumes:
-      - ./app/spring-boot-src/build/libs/spring-boot-src-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/app.war
+      - ./spring-boot-src/build/libs/spring-boot-src-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
       - ./logs/app:/usr/local/tomcat/logs
   db:
     build: ./db

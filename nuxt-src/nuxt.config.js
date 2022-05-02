@@ -53,7 +53,7 @@ export default {
     prefix: '/api',
   },
   proxy: {
-    '/api/': {target: 'http://localhost:8080/api/'},
+    '/api/': {target: 'https://localhost/api/'},
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

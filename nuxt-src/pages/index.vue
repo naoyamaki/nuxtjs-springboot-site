@@ -21,7 +21,7 @@ export default {
   },
   mounted: function () {
     axios
-      .get("http://localhost:8080/api/review/")
+      .get("/api/review/")
         .then((res) => {
           console.log(res);
           this.reviews = res.data.reviews;
