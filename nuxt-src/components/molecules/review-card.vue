@@ -1,20 +1,14 @@
 <template>
-  <a href="/#">
+  <a href="/">
     <article>
-      <p>{{ review.title }}</p>
-      <p>{{ review.body }}</p>
+      <p>sample</p>
+      <p>description</p>
     </article>
   </a>
 </template>
 
 <script>
 export default {
-  props: {
-   review: {
-     type: Object,
-     required: true,
-   },
- },
 }
 </script>
 

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data() {
     return {
@@ -28,16 +27,10 @@ export default {
     }
   },
   methods: {
-    test: function () {
-      axios
-        .post("/api/login/")
-          .then((res) => {
-            // do something
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    },
-  },
+    execLogin: function () {
+      // do request
+      console.log("TODO dev");
+    }
+  }
 }
 </script>

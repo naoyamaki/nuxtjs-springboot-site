@@ -5,7 +5,7 @@
     </NuxtLink>
     <ul class="pure-menu-list">
       <li class="pure-menu-item">
-        <NuxtLink  to="#" class="pure-menu-link">詳細検索
+        <NuxtLink  to="/" class="pure-menu-link">詳細検索
         </NuxtLink>
       </li>
       <li class="pure-menu-item">
@@ -13,18 +13,12 @@
         </NuxtLink>
       </li>
       <li class="pure-menu-item">
-        <NuxtLink  to="#" class="pure-menu-link">ログアウト
+        <NuxtLink  to="/" class="pure-menu-link">ログアウト
         </NuxtLink>
       </li>
     </ul>
   </header>
 </template>
-
-<script>
-export default {
-  //JavaScript(Vue.js)部分
-}
-</script>
 
 <style scoped lang="scss">
 header {
