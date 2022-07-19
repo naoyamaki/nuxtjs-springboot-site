@@ -1,33 +1,27 @@
 <template>
   <main>
-    <template
+    <p>toppu</p>
+    <template 
       v-for="review in reviews"
+      :key="review.id"
     >
       <molecules-review-card
         :review="review"
-        :key="review.id"
       />
     </template>
   </main>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data() {
     return {
-      reviews: [],
+      reviews: [
+        {id:1,title:"sample"},
+        {id:2,title:"sa2mple"},
+        {id:3,title:"samp3le"}
+      ],
     }
-  },
-  mounted: function () {
-    axios
-      .get("/api/review/")
-        .then((res) => {
-          this.reviews = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  },
+  }
 }
 </script>
